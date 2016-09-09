@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            position: relative;
+            margin-top: 5px;
+        }
+
+        #box div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            margin: 0 1px 1px 0;
+            background: #ccc url("img/pic.jpg") 50px 50px no-repeat;
+            cursor: pointer;
+        }
+    </style>
+    <script src="tools.js"></script>
+    <script>
+        window.onload = function (){
+
+            var box = wTools.$("#box");
+            var div = wTools.$("div",box);
+            var str = "";
+
+            // 循环生成100个div，并且形成10行10列
+            for( var i = 0; i < 100; i++ ){
+                var l = i % 10;
+                var t = parseInt(i / 10);
+                str += '<div style="left: '+ (l*51) +'px; top: '+ (t*51) +'px;"></div>';
+            }
+            box.innerHTML = str;//将拼好的字符串添入到box中，此时box中有100个div
+
+            // 此时循环div添加绑定事件处理
+            for( var i = 0; i < 100; i++ ){
+                div[i].index = i; // 自定义属性
+                // 鼠标滑过改变当前滑过div的background-position
+                div[i].onmouseover = function (){
+                    var l = this.index % 10;          // left值
+                    var t = parseInt(this.index / 10);   // top值
+                    this.style.backgroundPosition = (-l*50)+"px "+(-t*50)+"px";
+                    //this.style.opacity = 1;   // 另外一种方法可以通过改变透明度来实现
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="请刮开下边灰色区域">
+    <div id="box">
+        <!-- <div style="left: 0px; top: 0px;"></div>
+        <div style="backgroundPosition: -100px -100px;"></div> -->
+    </div>
+</body>
+</html>
+    

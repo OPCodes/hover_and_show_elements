@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        #box div {
+            margin: 0 10px 10px 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border: 5px solid #333;
+            border-radius: 5px;
+            font-size: 24px;
+            text-align: center;
+            color: #fff;
+            background: blue;
+        }
+    </style>
+    <script src="tools.js"></script>
+    <script>
+        /*
+            需求：生成100个DIV，呈十行十列，每隔4个变一组颜色
+        */
+        window.onload = function (){
+
+            var btn = wTools.$("#btn");
+            var box = wTools.$("#box");
+            var bg = ["red","yellow","green","blue"];
+
+            // 点击生成100个div
+            btn.onclick = function (){
+                box.innerHTML = "";
+                var str = "";
+                // 循环设置left、top、background值
+                for( var i = 0; i < 100; i++ ){
+                    var b = bg[i%4];      // 去bg中下标为i%4的值
+                    var l = i%10*65 + "px";   //  同一列的left值相等
+                    var t = Math.floor(i/10)*65 + "px";   //  同一行的top值相等
+                    str += '<div style="left:'+l+';top:'+t+';background:'+b+'">'+ (i+1) +'</div>';  //  拼接100个div的字符串
+                }
+                box.innerHTML = str;
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="生成100个div" />
+    <div id="box">
+        <!-- <div style="left:0px;top:0px;">1</div>
+        <div>2</div> -->
+    </div>
+</body>
+</html>
+    
